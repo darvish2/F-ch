@@ -1,0 +1,35 @@
+<br><br><br>
+
+<%= search_form_for @search do |f| %>
+
+  <%= f.label :title_cont, "スレ部分一致" %>
+  <%= f.search_field :title_cont %>
+
+
+  <div class="actions"><%= f.submit "検索" %></div>
+<% end %>
+
+
+<br><br><br>
+
+
+
+<h3>スレッド一覧</h3>
+<ul>
+  <% @topics.each do |topic| %>
+  <li><%= link_to topic.title, topic_path(topic.id) %></li>
+  <% end %>
+</ul>
+
+
+<br><br><br>
+
+
+
+<h3>スレッド作成</h3>
+<%= form_for @newTopic, :url => {:action => 'create'} do |f| %>
+<%= f.text_field :title %>
+<%= select :category, :name, Topic.categories.keys.to_a, include_blank: true %>
+<%= f.submit %>
+<% end %>
+
